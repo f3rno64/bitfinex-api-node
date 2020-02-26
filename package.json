@@ -1,15 +1,20 @@
 {
   "name": "bitfinex-api-node",
-  "version": "4.0.9",
+  "version": "4.0.10",
   "description": "Node reference library for Bitfinex API",
   "engines": {
     "node": ">=7"
   },
   "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  },
   "scripts": {
     "lint": "standard",
     "test": "npm run lint && npm run unit",
-    "unit": "NODE_ENV=test mocha -b --recursive",
+    "unit": "NODE_ENV=test nyc --reporter=lcov mocha -b --recursive",
     "manager_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/ws2_manager.js > docs/manager.md",
     "ws_docs": "node_modules/jsdoc-to-markdown/bin/cli.js lib/transports/ws2.js > docs/ws2.md",
     "docs": "npm run ws_docs && npm run manager_docs",
@@ -52,15 +57,17 @@
   },
   "homepage": "http://bitfinexcom.github.io/bitfinex-api-node/",
   "devDependencies": {
-    "bfx-api-mock-srv": "^1.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "bfx-api-mock-srv": "^1.0.0",
     "chai": "^3.4.1",
     "cli-table2": "^0.2.0",
     "dotenv": "^4.0.0",
+    "husky": "^4.2.3",
     "jsdoc-to-markdown": "^5.0.1",
     "mocha": "^3.4.2",
+    "nyc": "^15.0.0",
     "socks-proxy-agent": "^3.0.1",
     "standard": "^10.0.2"
   },
